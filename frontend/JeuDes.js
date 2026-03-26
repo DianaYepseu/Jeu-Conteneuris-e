@@ -54,5 +54,40 @@ class JeuDes {
     console.log(message);
   }
 
+  log(message) {
+    console.log(message);
+  }
+
+  incrementerNombreTours() {
+    this.nombreTour++;
+    this.champNombreTour.value = this.nombreTour;
+  }
+
+  confirmerConnexion() {
+    this.pseudonymeJoueur = this.champPseudonyme.value.trim();
+
+    if (!this.pseudonymeJoueur) {
+      alert("Entre un pseudonyme.");
+      this.boutonAuthentification.disabled = false;
+      return;
+    }
+
+    this.multiNode.demanderAuthentification(this.pseudonymeJoueur);
+  }
+
+  confirmerAuthentification(autresParticipants) {
+    this.formulaireAuthentification.querySelector("fieldset").disabled = true;
+    this.ajouterJoueur(this.pseudonymeJoueur);
+    this.afficherScores();
+
+    if (autresParticipants.length > 0) {
+      this.pseudonymeAutreJoueur = autresParticipants[0];
+      this.ajouterJoueur(this.pseudonymeAutreJoueur);
+      this.afficherScores();
+      this.afficherPartie();
+      this.determinePremierJoueur();
+    }
+  }
+
 
 new JeuDes();
